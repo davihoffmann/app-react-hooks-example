@@ -1,13 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+
+/**
+ * useState    -> criar variaveis de estado
+ * useEffect   -> para controlar o ciclo de vida dos components
+ * useMemo     -> para ouvir a alteração de apenas uma variavel do estudo e retornar um unico valor
+ * useCallback -> mesma coisa que o useMemo porem utilizado para funções
+ */
 
 function App() {
   const [tech, setTech] = useState([]);
   const [nameTech, setNameTech] = useState('');
 
-  function handleAdd() {
+  const handleAdd = useCallback(() => {
     setTech([...tech, nameTech]);
     setNameTech('');
-  }
+  }, [nameTech, tech]);
 
   useEffect(() => {
     const techs = localStorage.getItem('tech');
